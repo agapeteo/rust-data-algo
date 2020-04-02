@@ -1,5 +1,7 @@
 use std::collections::LinkedList;
 
+mod cons_list; 
+
 #[test]
 fn linked_list() {
     let mut linked_list: LinkedList<u8> = LinkedList::new();

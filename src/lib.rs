@@ -8,6 +8,13 @@ pub mod hashset;
 pub mod slices;
 pub mod queue;
 pub mod stack;
+pub mod recursion;
+pub mod sorting;
+pub mod tree;
+pub mod strings;
+pub mod math;
+pub mod bits;
+
 
 #[cfg(test)]
 mod tests {

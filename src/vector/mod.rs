@@ -1,3 +1,5 @@
+mod power_set;
+
 #[test]
 fn vector() {
     let empty_vector: Vec<String> = vec![]; // create empty vector using vec! macro

@@ -1,3 +1,5 @@
+mod word_count;
+
 use std::collections::HashMap;
 
 #[test]

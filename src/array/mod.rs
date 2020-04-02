@@ -1,6 +1,8 @@
 mod binary_search;
 mod validate_single_parentheses;
 mod validate_multiple_parentheses;
+mod evicting_ring_buffer;
+mod array_dedup;
 
 #[test]
 fn array() {
