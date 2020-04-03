@@ -4,6 +4,7 @@ mod validate_multiple_parentheses;
 mod evicting_ring_buffer;
 mod array_dedup;
 mod product_of_numbers;
+mod kadane;
 
 #[test]
 fn array() {
