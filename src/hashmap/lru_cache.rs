@@ -165,32 +165,38 @@ impl<K: Eq + Hash + Copy, V: Copy> CacheLru<K, V> {
     }
 }
 
-#[test]
-fn simple() {
-    let mut cache: CacheLru<i32, &str> = CacheLru::new(2);
-    cache.set(1, "one");
-    cache.set(2, "two");
 
-    assert_eq!(cache.get(1), Some("one"));
+#[cfg(test)]
+mod test {
+    use super::*;
 
-    cache.set(3, "three");
-    assert_eq!(cache.get(2), None);
+    #[test]
+    fn simple() {
+        let mut cache: CacheLru<i32, &str> = CacheLru::new(2);
+        cache.set(1, "one");
+        cache.set(2, "two");
 
-    cache.set(4,"four");
-    assert_eq!(cache.get(1), None);
+        assert_eq!(cache.get(1), Some("one"));
 
-    assert_eq!(cache.get(3), Some("three"));
-    assert_eq!(cache.get(4), Some("four"));
-}
+        cache.set(3, "three");
+        assert_eq!(cache.get(2), None);
 
-#[test]
-fn save_value() {
-    let mut cache: CacheLru<i32, &str> = CacheLru::new(2);
-    assert_eq!(cache.get(0), None);
+        cache.set(4,"four");
+        assert_eq!(cache.get(1), None);
 
-    cache.set(0,"0");
-    assert_eq!(cache.get(0), Some("0"));
+        assert_eq!(cache.get(3), Some("three"));
+        assert_eq!(cache.get(4), Some("four"));
+    }
 
-    cache.set(0,"zero");
-    assert_eq!(cache.get(0), Some("zero"));
+    #[test]
+    fn save_value() {
+        let mut cache: CacheLru<i32, &str> = CacheLru::new(2);
+        assert_eq!(cache.get(0), None);
+
+        cache.set(0,"0");
+        assert_eq!(cache.get(0), Some("0"));
+
+        cache.set(0,"zero");
+        assert_eq!(cache.get(0), Some("zero"));
+    }
 }
