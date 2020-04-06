@@ -4,11 +4,8 @@ use std::rc::Rc;
 use std::collections::hash_map::Entry;
 use std::cell::RefCell;
 
-
-#[allow(dead_code)]
 type NodeLink<K, V> = Rc<RefCell<Node<K, V>>>;
 
-#[allow(dead_code)]
 struct Node<K: Eq + Hash + Copy, V: Copy> {
     key: K,
     value: V,
@@ -120,7 +117,6 @@ impl<K: Eq + Hash + Copy, V: Copy> Queue<K, V> {
     }
 }
 
-#[allow(dead_code)]
 pub struct CacheLru<K: Eq + Hash + Copy, V: Copy> {
     cache: HashMap<K, NodeLink<K, V>>,
     queue: Queue<K, V>,
@@ -128,12 +124,12 @@ pub struct CacheLru<K: Eq + Hash + Copy, V: Copy> {
 }
 
 impl<K: Eq + Hash + Copy, V: Copy> CacheLru<K, V> {
-    fn new(capacity: usize) -> Self {
+    pub fn new(capacity: usize) -> Self {
         CacheLru { cache: HashMap::new(), queue: Queue::new(), capacity }
     }
 
     #[allow(dead_code)]
-    fn set(&mut self, key: K, value: V) {
+    pub fn set(&mut self, key: K, value: V) {
         if let Entry::Occupied(existing_entry) = self.cache.entry(key) {
             self.queue.remove(existing_entry.get().clone());
             existing_entry.remove();
@@ -149,7 +145,7 @@ impl<K: Eq + Hash + Copy, V: Copy> CacheLru<K, V> {
     }
 
     #[allow(dead_code)]
-    fn get(&mut self, key: K) -> Option<V> {
+    pub fn get(&mut self, key: K) -> Option<V> {
         match self.cache.entry(key) {
             Entry::Occupied(entry) => {
                 let node = entry.get();
