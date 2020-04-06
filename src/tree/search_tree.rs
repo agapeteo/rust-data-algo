@@ -45,6 +45,22 @@ impl<T: PartialOrd + Clone> BinaryTree<T> {
         }
         vec
     }
+
+    pub fn from_sorted(slice: &[T]) -> Self {
+        let root = BinaryTree::node_from_sorted(slice);
+        BinaryTree { root }
+    }
+
+    fn node_from_sorted(slice: &[T]) -> Option<Box<Node<T>>> {
+        if slice.is_empty() {
+            return None;
+        }
+        let mid = &slice.len() / 2;
+        let left = BinaryTree::node_from_sorted(&slice[..mid]);
+        let right = BinaryTree::node_from_sorted(&slice[mid + 1..]);
+
+        Some(Box::new(Node { value: slice[mid].clone(), left, right }))
+    }
 }
 
 impl<T: PartialOrd + Clone> Default for BinaryTree<T> {
@@ -222,6 +238,13 @@ mod tests {
             tree.add(i);
         }
         assert_eq!(tree.depth(), N);
+    }
+
+    #[test]
+    fn test_create_from_sorted() {
+        let arr = [1, 2, 3, 4, 6, 6, 7, 8, 9, 10];
+        let tree = BinaryTree::from_sorted(&arr);
+        assert_eq!(tree.depth(), 3);
     }
 }
 
