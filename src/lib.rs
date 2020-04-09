@@ -14,6 +14,7 @@ pub mod tree;
 pub mod strings;
 pub mod math;
 pub mod bits;
+pub mod trie;
 
 
 #[cfg(test)]
